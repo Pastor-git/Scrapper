@@ -5,6 +5,7 @@ import numpy as nump
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.remote.webelement import WebElement
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -17,7 +18,7 @@ print(row_number)
 
 # PĘTLA
 step = 0
-while step < 9:
+while step < 8:
 
     website = frame.iat[step, 2]
     # driver = webdriver.Chrome(executable_path="C:\webdrivers\chromedriver.exe")
@@ -30,8 +31,10 @@ while step < 9:
     TEST = driver.find_element(By.XPATH, "//*[contains(text(),'@')]")
     print("SELEMIUN ELEMENT: ", TEST)
     mail = str(TEST)
+    # WebElement
     element = driver.find_element(By.XPATH, "//*[contains(text(),'@')]").get_attribute("textContent")
-    frame.at[step, 'email'] = element
+    frame.at[step, 'email'] = mail
+    print(element)
     print(frame)
     TEST2 = driver.find_elements(By.XPATH, "//*[contains(text(),'window')]")
     if TEST2 is not None:
@@ -41,8 +44,6 @@ while step < 9:
     print(frame)
     driver.close()
     driver.quit()
-
-
 
     # instrukcja
     step = step+1
